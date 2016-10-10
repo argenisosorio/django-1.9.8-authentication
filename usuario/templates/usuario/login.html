@@ -1,0 +1,9 @@
+{% extends "base/base.html" %}
+{% block titulo %}Login{% endblock %}
+{% block cuerpo %}
+<form class="form-signin" method='post' action=''>{% csrf_token %}
+	User: {{form.username}} <br />
+	Password: {{form.password}} <br />
+	<input type="submit" value="Login">
+</form>
+{% endblock %}
