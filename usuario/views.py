@@ -28,7 +28,7 @@ from .models import *
 
 '''
 Función que valida si un usuario está autenticado, si no está autenticado
-se muestra el form de logeo.
+se muestra el formulario del login.
 '''
 def Login(request):
     if not request.user.is_anonymous():
@@ -56,7 +56,7 @@ def Login(request):
 
 '''
 Función que permite crear usuarios, si la cuenta se creo con éxito
-se redirige a otra plantilla.
+se redirige a otro template.
 '''
 def Create_User(request):
     usuario = request.user
@@ -109,3 +109,23 @@ Vista de la plantilla que muestra el perfil del usuario autenticado.
 def Profile(request):
     user = request.user
     return render_to_response('usuario/profile.html', {'user':user}, context_instance=RequestContext(request))
+
+
+
+'''
+Vista de la plantilla que se muestra el formulario para cambiar la contraseña del usuario logeado.
+'''
+@login_required(login_url='login')
+def Change_Password(request):
+    user = request.user
+    form = PasswordChangeForm(user=request.user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            print "PASSWORD CHANGEEEEEEE"
+            return HttpResponseRedirect('index')
+        else:
+            print "ERROR PASSWORD CHANGEEEEEEE"
+            return HttpResponseRedirect('change_password')
+    return render(request, 'usuario/change_password.html', {'form': form})
