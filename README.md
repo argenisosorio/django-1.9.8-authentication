@@ -1,1 +1,1 @@
-Proyecto Base en django-1.9.8, incorpora una aplicacion, con una base común y estáticos comunes.
+Proyecto Base en django-1.9.8, incorpora una aplicacion que gestiona la autenticación de usuarios, login, register y logout, change password, incorpora una base común y estáticos comunes.
