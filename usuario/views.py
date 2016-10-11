@@ -99,3 +99,13 @@ Funcion que cierra la sesión del usuario.
 def Logout(request):
     logout(request)
     return HttpResponseRedirect('index')
+
+
+
+'''
+Vista de la plantilla que muestra el perfil del usuario autenticado.
+'''
+@login_required(login_url='login')
+def Profile(request):
+    user = request.user
+    return render_to_response('usuario/profile.html', {'user':user}, context_instance=RequestContext(request))
