@@ -55,6 +55,34 @@ def Login(request):
 
 
 '''
+Función que permite crear usuarios, si la cuenta se creo con éxito
+se redirige a otra plantilla.
+'''
+def Create_User(request):
+    usuario = request.user
+    if request.method == 'POST':
+        form = MyRegistrationForm(request.POST)
+        if form.is_valid():
+            nuevo_usuario = form.save()
+            return HttpResponseRedirect('user_success')
+        else:
+            return HttpResponseRedirect('index')
+    args = {}
+    args['form'] = MyRegistrationForm()
+    return render(request, 'usuario/create_user.html', args)
+
+
+
+'''
+Vista de la plantilla que se muestra cuando la cuenta de usuario se creó correctamente.
+'''
+def User_Success(request):
+    usuario = request.user
+    return render_to_response('usuario/user_success.html', {'usuario':usuario}, context_instance=RequestContext(request))
+
+
+
+'''
 Vista de la plantilla principal, accede a esta luego de iniciar sesión.
 '''
 @login_required(login_url='login')

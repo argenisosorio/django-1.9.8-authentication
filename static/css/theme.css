@@ -20,3 +20,7 @@ body {
 .body {
 	height: 500px;
 }
+
+#id_is_active {
+	display: none;
+}

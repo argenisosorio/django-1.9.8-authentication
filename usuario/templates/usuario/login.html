@@ -2,8 +2,10 @@
 {% block titulo %}Login{% endblock %}
 {% block cuerpo %}
 <form class="form-signin" method='post' action=''>{% csrf_token %}
-	User: {{form.username}} <br />
+	Username: {{form.username}} <br />
 	Password: {{form.password}} <br />
 	<input type="submit" value="Login">
 </form>
+<h1>Register</h1>
+<a href="{% url 'create_user' %}"><button>Create user</button></a>
 {% endblock %}
